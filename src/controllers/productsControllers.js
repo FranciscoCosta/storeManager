@@ -17,7 +17,8 @@ const findById = async (req, res) => {
 
 const createProducts = async (req, res) => {
   const { name } = req.body;
-  const id = await productsService.createProducts(name);
+  const { body } = req;
+  const id = await productsService.createProducts(name, body);
   return res.status(201).json({ id, name });
 };
 
