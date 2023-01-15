@@ -1,5 +1,5 @@
 const productsModels = require('../models/productsModels');
-const validateProducts = require('../middlewares/validateProducts');
+const { validateName } = require('../middlewares/validateProducts');
 
 const findAll = async () => {
   const products = await productsModels.findAll();
@@ -15,7 +15,10 @@ const findById = async (id) => {
   return product;
 };
 
-const createProducts = async (name) => {
+const createProducts = async (req) => {
+  const { name } = req.body;
+     const resultValidation = validateName(name);
+  if (resultValidation) return resultValidation;
   const product = await productsModels.createProducts(name);
   return product;
 };
