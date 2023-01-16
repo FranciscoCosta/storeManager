@@ -8,7 +8,6 @@ const findAll = async (_req, res) => {
 const findById = async (req, res) => {
   const { id } = req.params;
   const product = await productsService.findById(id);
-  console.log(product);
   if (product.err) {
     return res.status(404).json(product.err);
   }
@@ -17,10 +16,11 @@ const findById = async (req, res) => {
 
 const createProducts = async (req, res) => {
   const { name } = req.body;
-  const { body } = req;
-  const id = await productsService.createProducts(name, body);
-  return res.status(201).json({ id, name });
-};
+  const result = await productsService.createProducts(name);
+if (result.status) return res.status(result.status).json(result.response);
+        const { status } = result;
+        return res.status(status).json(result);
+  };
 
 module.exports = {
   findAll,

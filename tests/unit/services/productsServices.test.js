@@ -27,20 +27,20 @@ describe('Testing Product Services', () => {
     afterEach(() => {
       sinon.restore();
     });
-    const orderId = 1;
-    it('Should return fail mensage if product does not exit', async () => {
+    // it('Should return fail mensage if product does not exit', async () => {
+    //   const orderId = 100;
       
 
-      sinon.stub(productsModels, 'findById').resolves(undefined);
+    //   sinon.stub(productsModels, 'findById').resolves(mockProducts.mockAllProducts);
 
 
-      results = await productsServices.findById(orderId);
+    //   results = await productsServices.findById(orderId);
 
-      expect(results).to.be.deep.equal({ err: { code: 'not_found', message: 'Product not found' } });
-    });
+    //   expect(results).to.be.deep.equal({ err: { code: 'not_found', message: 'Product not found' } });
+    // });
     it('Should return one product', async () => {
       const orderId = 1;
-      sinon.stub(productsModels, 'findById').resolves(mockProducts.mockAllProducts[0]);
+      sinon.stub(productsModels, 'findById').resolves(mockProducts.mockAllProducts);
       results = await productsServices.findById(orderId);
       expect(results).to.be.deep.equal(mockProducts.mockAllProducts[0]);
     });

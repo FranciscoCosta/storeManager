@@ -30,7 +30,7 @@ describe('Testing Product Models', () => {
       
       sinon.stub(connection, 'execute').resolves([mockProducts.mockAllProducts[0]]);
 
-      results = await productsModels.findById(1);
+      [results] = await productsModels.findById(1);
 
       expect(results).to.be.deep.equal(mockProducts
         .mockOneProduct);
@@ -48,6 +48,7 @@ describe('Testing Product Models', () => {
       sinon.stub(connection, 'execute').resolves([{ insertId: 5 }]);
 
       const result = await productsModels.createProducts(newProduct);
+
 
       expect(result).to.be.deep.equal(5) });
     });

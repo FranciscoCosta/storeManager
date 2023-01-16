@@ -7,19 +7,21 @@ const findAll = async () => {
 };
 
 const findById = async (id) => {
-  const product = await productsModels.findById(id);
-  if (!product) {
+  const [product] = await productsModels.findById(id);
+  console.log(product, 'AQUIIIII');
+  if (!product || product.length === 0) {
     return { err: { code: 'not_found', message: 'Product not found' } };
   }
   return product;
 };
 
-const createProducts = async (req) => {
-  const { name } = req.body;
-     const resultValidation = validateName(name);
+const createProducts = async (name) => {
+  const resultValidation = validateName(name);
+  console.log(resultValidation, 'aqui estou');
   if (resultValidation) return resultValidation;
   const product = await productsModels.createProducts(name);
-  return product;
+    const newProduct = { status: 201, response: { id: product, name } };
+    return newProduct;
 };
 
 module.exports = {
