@@ -27,17 +27,13 @@ describe('Testing Product Services', () => {
     afterEach(() => {
       sinon.restore();
     });
-    // it('Should return fail mensage if product does not exit', async () => {
-    //   const orderId = 100;
-      
+    it('Should return fail mensage if product does not exit', async () => {
+      sinon.stub(productsModels, 'findById').resolves([]);
+      const orderId = 999;
+      results = await productsServices.findById(orderId);
 
-    //   sinon.stub(productsModels, 'findById').resolves(mockProducts.mockAllProducts);
-
-
-    //   results = await productsServices.findById(orderId);
-
-    //   expect(results).to.be.deep.equal({ err: { code: 'not_found', message: 'Product not found' } });
-    // });
+      expect(results).to.be.deep.equal({ err: { code: 'not_found', message: 'Product not found' } })
+    });
     it('Should return one product', async () => {
       const orderId = 1;
       sinon.stub(productsModels, 'findById').resolves(mockProducts.mockAllProducts);
@@ -73,6 +69,35 @@ describe('Testing Product Services', () => {
 
       const results = await productsServices.createProducts(req);
     });
+  });
+
+
+    describe('Update a Product', () => {
+        afterEach(() => {
+      sinon.restore();
+    });
+    it('Should fail to update new Product', async () => {
+      const name = 'Testando';
+      const id = 1;
+
+      sinon.stub(productsModels, 'findById').resolves([[]]);
+
+      const results = await productsServices.updateProducts(id, name);
+      
+      expect(results).to.be.false;
+    });
+      it('Should update new Product', async () => {
+        const name = 'Testando';
+        const id = 1;
+
+        sinon.stub(productsModels, 'findById').resolves([['item', 'item2']]);
+        
+        const results = await productsServices.updateProducts(id, name);
+
+        expect(results).to.be.true;
+  
+      });
+
   });
   
 });

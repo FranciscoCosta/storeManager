@@ -25,7 +25,6 @@ const updateProducts = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
   const resultValidation = await validateProducts.validateName(name);
-  console.log(resultValidation, 'resultValidation');
   if (resultValidation) {
     return res.status(resultValidation.status).json(resultValidation.response);
   }

@@ -23,7 +23,7 @@ describe('Testing Product Models', () => {
   });
 
   describe('Geting one Product', () => {
-        afterEach(() => {
+    afterEach(() => {
       sinon.restore();
     });
     it('Should return one product', async () => {
@@ -50,6 +50,41 @@ describe('Testing Product Models', () => {
       const result = await productsModels.createProducts(newProduct);
 
 
-      expect(result).to.be.deep.equal(5) });
+      expect(result).to.be.deep.equal(5)
     });
   });
+  describe('Update one Product', () => {
+    afterEach(() => {
+      sinon.restore();
+    }
+    );
+    it('Should update one product', async () => {
+      const newProductName = { name: 'Teste' };
+      const idProduct = 1;
+
+      sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+      const result = await productsModels.updateProducts(idProduct, newProductName);
+
+      expect(result).to.be.deep.equal(1)
+
+    });
+  });
+
+    describe('Delete one Product', () => {
+    afterEach(() => {
+      sinon.restore();
+    }
+    );
+    it('Should delete one product', async () => {
+      const idProduct = 1;
+
+      sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+      const result = await productsModels.deleteProducts(idProduct);
+
+      expect(result).to.be.deep.equal(true)
+
+    });
+  });
+});

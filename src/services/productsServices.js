@@ -33,7 +33,6 @@ const updateProducts = async (id, name) => {
 
 const deleteProducts = async (id) => {
   const [product] = await productsModels.findById(id);
-  console.log(product, 'productExist');
   if (product.length === 0) return { status: 404, response: { message: 'Product not found' } };
   await productsModels.deleteProducts(id);
   return { status: 204 };
