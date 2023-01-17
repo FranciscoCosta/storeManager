@@ -1,16 +1,38 @@
 const connection = require('./connection');
 
 const findAll = async () => {
-  const query = 'SELECT * FROM sales_products ORDER BY id DESC, ORDER BY product_id ASC';
-  const [sales] = await connection.execute([query]);
+    const query = `
+    SELECT
+    (sp.sale_id) AS saleId,
+    (s.date) AS date,
+    (sp.product_id) AS productId,
+    (sp.quantity) AS quantity
+  FROM StoreManager.sales_products AS sp
+    JOIN StoreManager.sales AS s ON s.id = sp.sale_id
+      ORDER BY sp.sale_id ASC, sp.product_id ASC
+  `;
+    const [sales] = await connection.execute(query);
   return sales;
+};
+
+const findById = async (id) => {
+  const query = `
+  SELECT
+   (s.date) AS date,
+      (sp.product_id) AS productId,
+      (sp.quantity) AS quantity
+    FROM StoreManager.sales_products AS sp
+      JOIN StoreManager.sales AS s ON s.id = sp.sale_id
+        WHERE sp.sale_id = ?
+  `;
+    const [sale] = await connection.execute(query, [id]);
+  return sale;
 };
 
 const findByMax = async () => {
   const [id] = await connection.execute(
     'Select Max(id) as id from products',
 );
-  console.log(id[0].id);
   return id[0].id;
 };
 
@@ -33,4 +55,5 @@ module.exports = {
   createSales,
   createSalesDate,
   findByMax,
+  findById,
 };

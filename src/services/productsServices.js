@@ -8,7 +8,6 @@ const findAll = async () => {
 
 const findById = async (id) => {
   const [product] = await productsModels.findById(id);
-  console.log(product, 'AQUIIIII');
   if (!product || product.length === 0) {
     return { err: { code: 'not_found', message: 'Product not found' } };
   }
@@ -23,8 +22,19 @@ const createProducts = async (name) => {
     return newProduct;
 };
 
+const updateProducts = async (id, name) => {
+  const [resultado] = await productsModels.findById(id);
+  console.log(resultado.length, 'resultado');
+  if (resultado.length > 0) {
+     await productsModels.updateProducts(id, name);
+    return true;  
+  }
+    return false;
+};
+
 module.exports = {
   findAll,
   findById,
   createProducts,
+  updateProducts,
 };

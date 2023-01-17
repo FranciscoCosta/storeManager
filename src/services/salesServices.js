@@ -5,14 +5,13 @@ const findAll = async () => {
   return sales;
 };
 
-// const testa = (sales) => {
-//   const { name, error } = sales;
-//   console.log(name, error);
-// };
-// testa({ name: 'xico' });
-
-salesModels.findByMax();
-
+const findById = async (id) => {
+  const sale = await salesModels.findById(id);
+    if (!sale || sale.length === 0) {
+    return { err: { code: 'not_found', message: 'Sale not found' } };
+  }
+  return sale;
+};
 const createSales = async (sales) => {
   const saleId = await salesModels.createSalesDate();
   await Promise.all(sales.map(async (sale) => {
@@ -29,4 +28,5 @@ const createSales = async (sales) => {
 module.exports = {
   findAll,
   createSales,
+  findById,
 };
