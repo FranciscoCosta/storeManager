@@ -15,6 +15,7 @@ app.get('/products', productsController.findAll);
 app.get('/products/:id', productsController.findById);
 app.post('/products', productsController.createProducts);
 app.put('/products/:id', productsController.updateProducts);
+app.delete('/products/:id', productsController.deleteProducts);
 app.get('/sales', salesControllers.findAll);
 app.get('/sales/:id', salesControllers.findById);
 app.post('/sales', salesControllers.createSales);
