@@ -12,7 +12,6 @@ const findById = async (id) => {
     'SELECT * FROM products WHERE id=?',
     [id],
   );
-  console.log(product);
   return product;
 };
 

@@ -65,12 +65,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-01-13T20:40:50.666Z",
-    "modified": "2023-01-13T20:40:50.666Z",
+    "modified": "2023-01-16T23:00:35.580Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+      "raw": "[{quantity:1}]",
       "form": []
     },
     "tests": []

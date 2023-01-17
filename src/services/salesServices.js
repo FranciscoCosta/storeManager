@@ -5,19 +5,26 @@ const findAll = async () => {
   return sales;
 };
 
+// const testa = (sales) => {
+//   const { name, error } = sales;
+//   console.log(name, error);
+// };
+// testa({ name: 'xico' });
+
+salesModels.findByMax();
+
 const createSales = async (sales) => {
   const saleId = await salesModels.createSalesDate();
   await Promise.all(sales.map(async (sale) => {
     const { productId, quantity } = sale;
-    console.log(saleId, 'sale ID');
     await salesModels.createSales(saleId, productId, quantity);
-  }));
+ }));
    const newObject = {
       id: saleId,
-      itensSold: sales,
-    };
-    console.log(newObject, 'novo objcto');
-    return newObject;
+      itemsSold: sales,
+   };
+  const response = { status: 201, newSale: newObject };
+  return response;
 };
 module.exports = {
   findAll,

@@ -17,7 +17,6 @@ const findById = async (id) => {
 
 const createProducts = async (name) => {
   const resultValidation = validateName(name);
-  console.log(resultValidation, 'aqui estou');
   if (resultValidation) return resultValidation;
   const product = await productsModels.createProducts(name);
     const newProduct = { status: 201, response: { id: product, name } };
