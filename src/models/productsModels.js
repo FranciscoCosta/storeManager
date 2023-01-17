@@ -28,6 +28,7 @@ const updateProducts = async (id, name) => {
     'UPDATE products SET name=? WHERE id=?',
     [name, id],
   );
+  console.log(affectedRows, 'asdasdas');
   return affectedRows;
 };
 

@@ -24,7 +24,6 @@ const createProducts = async (name) => {
 
 const updateProducts = async (id, name) => {
   const [resultado] = await productsModels.findById(id);
-  console.log(resultado.length, 'resultado');
   if (resultado.length > 0) {
      await productsModels.updateProducts(id, name);
     return true;  
