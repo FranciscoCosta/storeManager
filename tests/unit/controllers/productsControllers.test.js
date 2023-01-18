@@ -3,11 +3,9 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
 
-const productsModels = require('../../../src/models/productsModels');
 const productsServices = require('../../../src/services/productsServices');
 const productsControllers = require('../../../src/controllers/productsControllers');
 const mockProducts = require('../mocks/mockProducts');
-const connection = require('../../../src/models/connection');
 
 chai.use(sinonChai);
 const { expect } = require('chai');
